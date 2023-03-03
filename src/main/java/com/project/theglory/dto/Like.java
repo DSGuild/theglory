@@ -9,15 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-	private String id;
+public class Like {
+	private String likeId;
+	private String postId;
 	private String userId;
-	private String userNm;
-	private String password;
-	private String email;
-	private String createdAt;
-	private String updatedAt;
-	private String deletedAt;
-	
-	
+	private String isLike;
+
 }
