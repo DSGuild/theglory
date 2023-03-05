@@ -26,9 +26,6 @@ public class User {
 	@Column(name = "id", unique = true)
 	private String id;
 	
-	@Column(name = "password")
-	private String password;
-	
 	@Column(name = "user_nm")
 	private String userNm;
 	
