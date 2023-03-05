@@ -16,23 +16,29 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="favorite")
-public class Favorite {
+@Table(name="user_poll")
+public class UserPoll {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long favoriteId;
+	private Long userPollId;
 	
-	// Post - Favorite Join 확인 완료(230305 - Crane)
+	// UserVote - Post Join 확인 (230305 - Crane)
 	@ManyToOne
 	@JoinColumn(name = "post")
 	private Post post;
 	
-	// User - Favorite Join 확인 완료(230305 - Crane)
+	// UserVote - User Join 확인 (230305 - Crane)
 	@ManyToOne
 	@JoinColumn(name = "user")
 	private User user;
 	
-	@Column(name = "created_at")
-	private LocalDateTime createdAt;
+	// UserVote - VoteSelection 확인 (230305 - Crane)
+	@ManyToOne
+	@JoinColumn(name = "poll_selection")
+	private PollSelection pollSelection;
+	
+	@Column(name = "poll_at")
+	private LocalDateTime pollAt;
 
 }

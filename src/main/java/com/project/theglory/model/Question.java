@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,11 +19,17 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long questionId;
 	
-	@Column(name = "title")
-	private String title;
-	 
-	@Column(name = "content")
-	private String content;
+	@Column(name = "season")
+	private Integer season;
+	
+	@Column(name = "level")
+	private Integer level;
+	
+	@Column(name = "quiz")
+	private Integer quiz;
+	
+	@Column(name = "image")
+	private String image;
 	
 	@Column(name = "select_one")
 	private String selectOne;
@@ -39,13 +43,13 @@ public class Question {
 	@Column(name = "select_four")
 	private String selectFour;
 	
-	@Column(name = "question_img")
-	private String questionImg;
+	@Column(name = "answer")
+	private String answer;
+	
+	@Column(name = "out_num")
+	private Integer outNum;
 	
 	@Column(name = "correct_num")
-	private int correctNum;
-	
-	@Column(name = "question_level")
-	private int questionLevel;
+	private Integer correctNum;
 
 }

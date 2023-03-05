@@ -1,6 +1,6 @@
 package com.project.theglory.model;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,23 +17,34 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="favorite")
-public class Favorite {
+@Table(name="post_poll")
+public class Postpoll {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long favoriteId;
+	private Long postpollId;
 	
-	// Post - Favorite Join 확인 완료(230305 - Crane)
 	@ManyToOne
 	@JoinColumn(name = "post")
 	private Post post;
 	
-	// User - Favorite Join 확인 완료(230305 - Crane)
-	@ManyToOne
-	@JoinColumn(name = "user")
-	private User user;
+	@Column(name = "title")
+	private String title;
 	
-	@Column(name = "created_at")
-	private LocalDateTime createdAt;
+	@Column(name = "image")
+	private String image;
+	
+	@Column(name = "reply_num")
+	private Integer replyNum;
+	
+	@Column(name = "hotnow")
+	private boolean hotnow;
+	
+	@Column(name = "total_poll")
+	private Integer totalPoll;
+	
+	
+	@OneToMany(mappedBy = "postpoll")
+	private List<PollSelection> pollSelection;
 
 }

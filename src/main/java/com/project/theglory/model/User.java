@@ -26,11 +26,11 @@ public class User {
 	@Column(name = "id", unique = true)
 	private String id;
 	
-	@Column(name = "user_nm")
-	private String userNm;
-	
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
+	
+	@Column(name = "user_nm")
+	private String userNm;
 	
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
@@ -41,10 +41,26 @@ public class User {
 	@Column(name = "profile_img")
 	private String profileImg;
 	
+	@Column(name = "badge")
+	private Integer badge;
+	
+	@Column(name = "episode")
+	private Integer episode;
+	
+    // 테이블 조인 	
 	@OneToMany(mappedBy = "user")
-	private List<Favorite> like;
+	private List<Favorite> favorite;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Reply> reply;
+	
+	@OneToMany(mappedBy = "user")
+	private List<UserPoll> userPoll;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Post> post;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Exam> exam;
 	
 }

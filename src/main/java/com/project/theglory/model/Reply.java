@@ -24,11 +24,11 @@ public class Reply {
 	private Long replyId;
 	
 	@ManyToOne
-	@JoinColumn(name = "post_id")
+	@JoinColumn(name = "post")
 	private Post post;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user")
 	private User user;
 	
 	@Column(name = "content")
@@ -37,13 +37,7 @@ public class Reply {
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
 	
-	@Column(name = "update_date")
-	private LocalDateTime updateDate;
-	
-	@Column(name = "update_yn")
-	private String updateYn;
-	
 	@Column(name = "delete_yn")
-	private String deleteYn;
+	private boolean deleteYn;
 	
 }

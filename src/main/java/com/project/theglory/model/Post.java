@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -23,39 +25,33 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long postId;
 	
-	@Column(name = "category")
-	private String category;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
-	@Column(name = "title")
-	private String title;
+	@Column(name = "category")
+	private Integer category;
 	
 	@Column(name = "content")
 	private String content;
 	
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+	
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
+	
+	@Column(name = "delete_yn")
+	private boolean deleteYn;
+	
+	@Column(name = "episode")
+	private Integer episode;
+	
 	@Column(name = "likes")
-	private String likes;
+	private Integer likes;
 	
-	@Column(name = "is_delete")
-	private String isDelete;
 	
-	@Column(name = "vote_count")
-	private String voteCount;
-	
-	@Column(name = "image")
-	private String image;
-	
-	@Column(name = "create_date")
-	private LocalDateTime createDate;
-	
-	@Column(name = "delete_date") 
-	private LocalDateTime deleteDate;
-	
-	@Column(name = "user_id")
-	private Long userId;
-	
-	@Column(name = "episode_select")
-	private int episodeSelect;
-	
+	// 테이블 조인 
 	@OneToMany(mappedBy = "post")
 	private List<Favorite> favorite;
 	
@@ -63,5 +59,17 @@ public class Post {
 	private List<Reply> reply;
 	
 	@OneToMany(mappedBy = "post")
-	private List<Vote> vote;
+	private List<UserPoll> userPoll;
+	
+	@OneToMany(mappedBy = "post")
+	private List<PostGeneral> postGeneral;
+	
+	@OneToMany(mappedBy = "post")
+	private List<Postpoll> postPoll;
+	
+	@OneToMany(mappedBy = "post")
+	private List<PostCharacter> postCharacter;
+	
+	@OneToMany(mappedBy = "post")
+	private List<PostStory> postStory;
 }
