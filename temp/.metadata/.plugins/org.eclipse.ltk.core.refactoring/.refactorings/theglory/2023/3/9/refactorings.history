@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;theglory/src/main/java/com/project/theglory/model/Like.java&apos; to &apos;Favorite.java&apos;" description="Rename resource &apos;Like.java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/java/com/project/theglory/model/Like.java" name="Favorite.java" stamp="1677919439737" updateReferences="true"/>
+</session>

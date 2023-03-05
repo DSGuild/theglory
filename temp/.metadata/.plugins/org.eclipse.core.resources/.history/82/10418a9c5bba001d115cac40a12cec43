@@ -1,0 +1,5 @@
+package com.project.theglory.model;
+
+public class Post {
+
+}

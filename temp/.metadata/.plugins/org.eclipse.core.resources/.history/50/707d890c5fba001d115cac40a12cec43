@@ -1,0 +1,9 @@
+package com.project.theglory.service;
+
+import com.project.theglory.repository.UserRepository;
+
+public class UserService {
+	
+	private final UserRepository userRepository;
+
+}
