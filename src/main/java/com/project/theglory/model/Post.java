@@ -42,7 +42,7 @@ public class Post {
 	private LocalDateTime updatedAt;
 	
 	@Column(name = "delete_yn")
-	private boolean deleteYn;
+	private Integer deleteYn;
 	
 	@Column(name = "episode")
 	private Integer episode;
