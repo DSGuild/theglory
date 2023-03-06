@@ -15,15 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="post_character")
-public class PostCharacter {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long postCharacterId;
-	
-	@ManyToOne
-	@JoinColumn(name = "post")
-	private Post post;
+public class PostCharacter extends Post {
 	
 	@Column(name = "character_tag")
 	private Integer characterTag;

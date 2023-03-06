@@ -15,15 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="post_general")
-public class PostGeneral {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long postGeneralId;
-	
-	@ManyToOne
-	@JoinColumn(name = "post")
-	private Post post;
+public class PostGeneral extends Post {
 	
 	@Column(name = "title")
 	private String title;

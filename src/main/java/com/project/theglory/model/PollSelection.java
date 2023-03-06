@@ -23,8 +23,8 @@ public class PollSelection {
 	
 	// Ok. Crane.
 	@ManyToOne
-	@JoinColumn(name = "postpoll")
-	private Postpoll postpoll;
+	@JoinColumn(name = "post_poll")
+	private PostPoll postPoll;
 	
 	@Column(name = "content")
 	private String content;
