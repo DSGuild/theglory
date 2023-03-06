@@ -19,5 +19,9 @@ public class PostCharacter extends Post {
 	
 	@Column(name = "character_tag")
 	private Integer characterTag;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "post")
+//	private Post post;
 
 }

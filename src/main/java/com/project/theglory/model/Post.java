@@ -58,25 +58,15 @@ public class Post {
 	private Integer likes;
 	
 	
-//	// 테이블 조인 
-//	@OneToMany(mappedBy = "post")
-//	private List<Favorite> favorite;
-//	
-//	@OneToMany(mappedBy = "post")
-//	private List<Reply> reply;
-//	
-//	@OneToMany(mappedBy = "post")
-//	private List<UserPoll> userPoll;
-//	
-//	@OneToMany(mappedBy = "post")
-//	private List<PostGeneral> postGeneral;
-//	
-//	@OneToMany(mappedBy = "post")
-//	private List<PostPoll> postPoll;
-//	
-//	@OneToMany(mappedBy = "post")
-//	private List<PostCharacter> postCharacter;
-//	
-//	@OneToMany(mappedBy = "post")
-//	private List<PostStory> postStory;
+	// 테이블 조인 
+	@OneToMany(mappedBy = "post")
+	private List<Favorite> favorite;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "post")
+	private List<Reply> reply;
+	
+	@OneToMany(mappedBy = "post")
+	private List<UserPoll> userPoll;
+	
 }
