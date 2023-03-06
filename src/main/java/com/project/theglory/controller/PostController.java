@@ -56,7 +56,11 @@ public class PostController {
 		Post post;
 		
 		if (category == 1) post = objectMapper.convertValue(map, PostGeneral.class);
-		else if (category == 2) post = objectMapper.convertValue(map, PostPoll.class);
+		else if (category == 2) {
+			PostPoll postPoll = objectMapper.convertValue(map, PostPoll.class);
+			postService.createPostSelection(postPoll);
+			post = postPoll;
+		}
 		else if (category == 3) post = objectMapper.convertValue(map, PostCharacter.class);
 		else post = objectMapper.convertValue(map, PostStory.class);
 		
