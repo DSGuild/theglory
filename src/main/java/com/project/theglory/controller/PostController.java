@@ -1,98 +1,63 @@
 package com.project.theglory.controller;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.theglory.model.Post;
-import com.project.theglory.model.PostCharacter;
-import com.project.theglory.model.PostGeneral;
-import com.project.theglory.model.PostPoll;
-import com.project.theglory.model.PostStory;
-import com.project.theglory.model.Reply;
-import com.project.theglory.repository.PostRepository;
-import com.project.theglory.repository.ReplyRepository;
+import com.project.theglory.domain.entity.Post;
+import com.project.theglory.domain.entity.Reply;
+import com.project.theglory.dto.PostRequestDto;
+import com.project.theglory.dto.PostResponseDto;
+import com.project.theglory.dto.ReplyResponseDto;
 import com.project.theglory.service.PostService;
-import com.project.theglory.service.ReplyService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(value = "/api/post")
 @RequiredArgsConstructor
-@Slf4j
 public class PostController {
-	private final PostService postService;
-	private final PostRepository postRepository;
-	private final ReplyRepository replyRepository;
-	private final ReplyService replyService;
 	
+	final private PostService postService;
+
 	@GetMapping("")
-	public Page<Post> getAllPosts(
-//			@RequestParam(value="date") LocalDateTime date,
-			Integer Integer, Pageable pageable) {
-		return postRepository.findByDeleteYn(Integer, pageable);
+	public List<PostResponseDto> getPosts() {
+		List<Post> posts = postService.getPosts();
+		List<PostResponseDto> responses = new ArrayList<PostResponseDto>();
+		for (Post p : posts) {
+			responses.add(PostResponseDto.builder().entity(p).build()); 
+		}
+		return responses;
 	}
 	
 	@GetMapping("/{id}")
-	public Post getPost(@PathVariable Long id) {
-		return postService.getPost(id);
-	}
-	
-	@GetMapping("/{id}/reply")
-	public List<Reply> getReplies(@PathVariable Long id) {
-		return replyService.getReplies(id);
+	public PostResponseDto getPost(@PathVariable Long id) {
+		Post post = postService.getPost(id);
+		return PostResponseDto.builder().entity(post).build();
 	}
 	
 	@PostMapping("")
-	public void createPost(@RequestBody Map<String, Object> map) {
-		int category = (int)map.get("category");
-		ObjectMapper objectMapper = new ObjectMapper();
-		Post post;
-		
-		if (category == 1) post = objectMapper.convertValue(map, PostGeneral.class);
-		else if (category == 2) {
-			PostPoll postPoll = objectMapper.convertValue(map, PostPoll.class);
-			postService.createPostSelection(postPoll);
-			post = postPoll;
-		}
-		else if (category == 3) post = objectMapper.convertValue(map, PostCharacter.class);
-		else post = objectMapper.convertValue(map, PostStory.class);
-		
+	public void createPost(@RequestBody PostRequestDto postRequestDto) {
+		Post post = postRequestDto.toEntity();
 		postService.createPost(post);
 	}
 	
-	@PutMapping("/{id}")
-	public void updatePost(@PathVariable Long id, @RequestBody Map<String, Object> map) {
-		Post dbPost = postService.getPost(id);
-		
-		int category = dbPost.getCategory();
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		Post post;
-		if (category == 1) post = objectMapper.convertValue(map, PostGeneral.class);
-		else if (category == 2) post = objectMapper.convertValue(map, PostPoll.class);
-		else if (category == 3) post = objectMapper.convertValue(map, PostCharacter.class);
-		else post = objectMapper.convertValue(map, PostStory.class);
-		
-		post.setPostId(dbPost.getPostId());
-		
-		postService.updatePost(post);
+	// TODO: post관련 Update, Delete구문 작성해야 함.
+	
+	@GetMapping("/{id}/reply")
+	public List<ReplyResponseDto> getReplies(@PathVariable Long id) {
+		List<Reply> replies = postService.getReplies(id);
+		List<ReplyResponseDto> responses = new ArrayList<ReplyResponseDto>();
+		for (Reply r : replies) {
+			responses.add(ReplyResponseDto.builder().entity(r).build()); 
+		}
+		return responses;
 	}
 	
 }
