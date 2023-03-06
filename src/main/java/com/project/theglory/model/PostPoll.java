@@ -33,7 +33,7 @@ public class PostPoll extends Post {
 	private Integer replyNum;
 	
 	@Column(name = "hotnow")
-	private boolean hotnow;
+	private Integer hotnow;
 	
 	@Column(name = "total_poll")
 	private Integer totalPoll;
