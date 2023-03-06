@@ -2,6 +2,8 @@ package com.project.theglory.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class Reply {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long replyId;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "post")
 	private Post post;
@@ -38,6 +41,6 @@ public class Reply {
 	private LocalDateTime createDate;
 	
 	@Column(name = "delete_yn")
-	private boolean deleteYn;
+	private Integer deleteYn;
 	
 }

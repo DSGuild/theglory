@@ -53,6 +53,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Favorite> favorite;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Reply> reply;
 	

@@ -21,7 +21,6 @@ public class PollSelection {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long pollSelectionId;
 	
-	// Ok. Crane.
 	@ManyToOne
 	@JoinColumn(name = "post_poll")
 	private PostPoll postPoll;
