@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="quiz")
 @NoArgsConstructor
-// 문제은행 데이터베이스 Entity.
 public class Quiz {
 	
 	@Id

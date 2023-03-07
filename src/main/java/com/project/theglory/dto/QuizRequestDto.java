@@ -16,5 +16,11 @@ public class QuizRequestDto {
 	public QuizRequestDto(Quiz entity) {
 		this.level = entity.getLevel();
 	}
+	
+	public Quiz toEntity() {
+		return Quiz.builder()
+				.level(level)
+				.build();
+	}
 
 }
