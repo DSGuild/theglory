@@ -17,6 +17,7 @@ public class PostResponseDto {
 	private LocalDateTime createdAt;
 	private Integer episode;
 	private Integer favorite;
+	private Integer replyCount;
 	private Long userId;
 	private String userNm;
 	private String profile;
@@ -28,7 +29,8 @@ public class PostResponseDto {
 		this.content = entity.getContent();
 		this.createdAt = entity.getCreatedAt();
 		this.episode = entity.getEpisode();
-		this.favorite = entity.getFavorite();
+		this.favorite = entity.getFavorities().size();
+		this.replyCount = entity.getReplies().size();
 		this.userId = entity.getUser().getUserId();
 		this.userNm = entity.getUser().getUserNm();
 		this.profile = entity.getUser().getProfile();

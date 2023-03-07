@@ -1,6 +1,7 @@
 package com.project.theglory.domain.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +36,12 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@OneToMany(mappedBy = "post")
+	private List<Favorite> favorities;
+	
+	@OneToMany(mappedBy = "post")
+	private List<Reply> replies;
 
 	@Builder
 	public Post(Long postId, String title, String content, LocalDateTime createdAt, Integer deleteYn, Integer episode,

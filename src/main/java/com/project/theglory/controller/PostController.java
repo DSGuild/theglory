@@ -3,6 +3,7 @@ package com.project.theglory.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,10 @@ import com.project.theglory.domain.entity.Reply;
 import com.project.theglory.dto.PostRequestDto;
 import com.project.theglory.dto.PostResponseDto;
 import com.project.theglory.dto.ReplyResponseDto;
+import com.project.theglory.service.FavoriteService;
 import com.project.theglory.service.PostService;
+import com.project.theglory.service.ReplyService;
+import com.project.theglory.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +29,8 @@ import lombok.RequiredArgsConstructor;
 public class PostController {
 	
 	final private PostService postService;
+	final private ReplyService replyService;
+	final private FavoriteService favoriteService;
 
 	@GetMapping("")
 	public List<PostResponseDto> getPosts() {
@@ -52,12 +58,22 @@ public class PostController {
 	
 	@GetMapping("/{id}/reply")
 	public List<ReplyResponseDto> getReplies(@PathVariable Long id) {
-		List<Reply> replies = postService.getReplies(id);
+		List<Reply> replies = replyService.getReplies(id);
 		List<ReplyResponseDto> responses = new ArrayList<ReplyResponseDto>();
 		for (Reply r : replies) {
 			responses.add(ReplyResponseDto.builder().entity(r).build()); 
 		}
 		return responses;
+	}
+	
+	@PostMapping("/{postId}/favorite/{userId}")
+	public void createFavorite(@PathVariable Long postId, @PathVariable Long userId) {
+		favoriteService.createFavorite(postId, userId);
+	}
+	
+	@DeleteMapping("/{postId}/favorite/{userId}")
+	public void deleteFavorite(@PathVariable Long postId, @PathVariable Long userId) {
+		favoriteService.deleteFavorite(postId, userId);
 	}
 	
 }
