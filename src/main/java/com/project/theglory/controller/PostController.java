@@ -2,17 +2,22 @@ package com.project.theglory.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.theglory.domain.entity.Favorite;
 import com.project.theglory.domain.entity.Post;
 import com.project.theglory.domain.entity.Reply;
+import com.project.theglory.domain.entity.User;
 import com.project.theglory.dto.PostRequestDto;
 import com.project.theglory.dto.PostResponseDto;
 import com.project.theglory.dto.ReplyResponseDto;
@@ -32,13 +37,20 @@ public class PostController {
 	final private ReplyService replyService;
 	final private FavoriteService favoriteService;
 
-	@GetMapping("")
-	public List<PostResponseDto> getPosts() {
-		List<Post> posts = postService.getPosts();
-		List<PostResponseDto> responses = new ArrayList<PostResponseDto>();
-		for (Post p : posts) {
-			responses.add(PostResponseDto.builder().entity(p).build()); 
-		}
+	/**
+	 * 전체 포스트를 가져온다.
+	 * param으로 userId가 있을 경우 좋아요 누른 포스트를 체크하여 반환한다.
+	 * @name getPosts
+	 * @author heony
+	 * @since 2023. 3. 7. 오후 5:23:03
+	 * @comment 
+	 * @param requestMap
+	 * @return
+	 */
+	@GetMapping("/all/{id}")
+	public List<PostResponseDto> getPosts(@PathVariable Long id) {
+		List<PostResponseDto> responses;
+		responses = postService.getPosts(id);
 		return responses;
 	}
 	
@@ -67,13 +79,23 @@ public class PostController {
 	}
 	
 	@PostMapping("/{postId}/favorite/{userId}")
-	public void createFavorite(@PathVariable Long postId, @PathVariable Long userId) {
-		favoriteService.createFavorite(postId, userId);
-	}
-	
-	@DeleteMapping("/{postId}/favorite/{userId}")
-	public void deleteFavorite(@PathVariable Long postId, @PathVariable Long userId) {
-		favoriteService.deleteFavorite(postId, userId);
-	}
+    public ResponseEntity<?> addFavorite(@PathVariable Long postId, @PathVariable Long userId) {
+        try {
+            Post post = Post.builder().postId(postId).build();
+            User user = User.builder().userId(userId).build();
+            Favorite favorite = favoriteService.addFavorite(post, user);
+            return ResponseEntity.ok(favorite);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
+    @DeleteMapping("/{postId}/favorite/{userId}")
+    public ResponseEntity<?> removeFavorite(@PathVariable Long postId, @PathVariable Long userId) {
+    	Post post = Post.builder().postId(postId).build();
+        User user = User.builder().userId(userId).build();
+        favoriteService.removeFavorite(post, user);
+        return ResponseEntity.ok().build();
+    }
 	
 }

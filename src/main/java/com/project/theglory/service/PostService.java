@@ -1,5 +1,6 @@
 package com.project.theglory.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import com.project.theglory.domain.repository.PostRepository;
 import com.project.theglory.domain.repository.ReplyRepository;
 import com.project.theglory.domain.repository.UserRepository;
 import com.project.theglory.dto.FavoriteRequestDto;
+import com.project.theglory.dto.PostResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,8 +24,32 @@ public class PostService {
 	
 	final private PostRepository postRepository;
 
-	public List<Post> getPosts() {
-		return postRepository.findAll();
+	public List<PostResponseDto> getPosts() {
+		List<Post> posts = postRepository.findAll();
+        List<PostResponseDto> postResponseDtos = new ArrayList<>();
+        for (Post post : posts) {
+            PostResponseDto postResponseDto = PostResponseDto.builder()
+                    .entity(post)
+                    .likedByUser(false)
+                    .build();
+            postResponseDtos.add(postResponseDto);
+        }
+        return postResponseDtos;
+	}
+	
+	public List<PostResponseDto> getPosts(Long userId) {
+		List<Object[]> postResults = postRepository.findAllWithIsLikedByUser(userId);
+        List<PostResponseDto> postResponseDtos = new ArrayList<>();
+        for (Object[] postResult : postResults) {
+        	Post post = (Post) postResult[0];
+            boolean isLiked = (boolean) postResult[1];
+            PostResponseDto postResponseDto = PostResponseDto.builder()
+                    .entity(post)
+                    .likedByUser(isLiked)
+                    .build();
+            postResponseDtos.add(postResponseDto);
+        }
+        return postResponseDtos;
 	}
 
 	public Post getPost(Long id) {

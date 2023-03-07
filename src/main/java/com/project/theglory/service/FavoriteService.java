@@ -21,14 +21,17 @@ public class FavoriteService {
 	final private PostRepository postRepository;
 	final private UserRepository userRepository;
 
-	public void createFavorite(Long postId, Long userId) {
-//		Favorite favorite = favoriteRepository.findByPostIdAndUserId(postId, userId);
-//        return favoriteRepository.save(favorite);
-	}
-
-	public void deleteFavorite(Long postId, Long userId) {
-		Post post = postRepository.findById(postId).orElse(null);
-		User user = userRepository.findById(userId).orElse(null);
-//		favoriteRepository.deleteById(Favorite.builder().post(post).user(user).build());
-	}
+	public Favorite addFavorite(Post post, User user) {
+        List<Favorite> favorites = favoriteRepository.findByPostAndUser(post, user);
+        if (!favorites.isEmpty()) {
+            throw new RuntimeException("Favorite already exists");
+        }
+        Favorite favorite = Favorite.builder().post(post).user(user).build();
+        return favoriteRepository.save(favorite);
+    }
+	
+	public void removeFavorite(Post post, User user) {
+        favoriteRepository.deleteByPostAndUser(post, user);
+    }
+	
 }

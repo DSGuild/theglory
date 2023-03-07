@@ -21,9 +21,10 @@ public class PostResponseDto {
 	private Long userId;
 	private String userNm;
 	private String profile;
+	private boolean likedByUser;
 	
 	@Builder
-	public PostResponseDto(Post entity) {
+	public PostResponseDto(Post entity, boolean likedByUser) {
 		this.postId = entity.getPostId();
 		this.title = entity.getTitle();
 		this.content = entity.getContent();
@@ -34,5 +35,6 @@ public class PostResponseDto {
 		this.userId = entity.getUser().getUserId();
 		this.userNm = entity.getUser().getUserNm();
 		this.profile = entity.getUser().getProfile();
+		this.likedByUser = likedByUser;
 	}
 }
