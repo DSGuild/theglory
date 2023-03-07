@@ -19,7 +19,7 @@ public class Quiz {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long quizId;
-	private String level;
+	private Integer level;
 	private String image;
 	private String question;
 	private String selectOne;
@@ -29,7 +29,7 @@ public class Quiz {
 	private Integer answer;
 	
 	@Builder
-	public Quiz(Long quizId, String level, String image, String question, String selectOne, String selectTwo, String selectThree, String selectFour, Integer answer) {
+	public Quiz(Long quizId, Integer level, String image, String question, String selectOne, String selectTwo, String selectThree, String selectFour, Integer answer) {
 		this.quizId =quizId;
 		this.level = level;
 		this.image = image;
