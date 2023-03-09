@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +17,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +24,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @Table(name="post")
-@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 public class Post {
 
@@ -35,7 +32,6 @@ public class Post {
 	private Long postId;
 	private String title;
 	private String content;
-	@CreatedDate
 	private LocalDateTime createdAt;
 	private Integer deleteYn;
 	private Integer episode;

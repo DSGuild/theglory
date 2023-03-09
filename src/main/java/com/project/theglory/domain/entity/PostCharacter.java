@@ -1,7 +1,6 @@
 package com.project.theglory.domain.entity;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -11,7 +10,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,39 +19,31 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name="user")
 @EntityListeners(AuditingEntityListener.class)
+@Table(name="post_character")
 @NoArgsConstructor
-public class User {
+public class PostCharacter {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
-	private String email;
-	private String userNm;
-	private String profile;
+	private Long postCharacterId;
+	private String content;
+	private Integer characterCode;
+	
 	@CreatedDate
 	private LocalDateTime createdAt;
-	private int badge1;
-	private int badge2;
-	private int episode;
+		
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
-	@OneToMany(mappedBy = "user")
-	private List<Favorite> favorities;
-
+	
 	@Builder
-	public User(Long userId, String email, String userNm, String profile, LocalDateTime createdAt, int badge1,
-			int badge2, int episode, List<Favorite> favorities) {
-		super();
-		this.userId = userId;
-		this.email = email;
-		this.userNm = userNm;
-		this.profile = profile;
+	public PostCharacter(Long postCharacterId, String content, Integer characterCode, LocalDateTime createdAt, User user) {
+		this.postCharacterId = postCharacterId;
+		this.content = content;
+		this.characterCode = characterCode;
 		this.createdAt = createdAt;
-		this.badge1 = badge1;
-		this.badge2 = badge2;
-		this.episode = episode;
-		this.favorities = favorities;
+		this.user = user;
 	}
-
 }
