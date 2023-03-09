@@ -102,6 +102,12 @@ public class PostController {
         User user = User.builder().userId(userId).build();
         favoriteService.removeFavorite(post, user);
         return ResponseEntity.ok().build();
+    }	
+    
+    // TODO : 포스트 좋아요 순으로 정렬 시켜서 응답
+    @GetMapping("/all/favorite")
+	public PostResponseDto getOrderByFavorite() {
+        Post post = postService.getOrderByFavorite();
+        return PostResponseDto.builder().entity(post).build();
     }
-	
 }

@@ -60,6 +60,9 @@ public class PostService {
 		postRepository.save(post);
 		
 	}
-
 	
+	//TODO : 포스트 좋아요 순으로 정렬해서 RESPONSE
+	public Post getOrderByFavorite() {
+		return postRepository.orderByFavorite();
+	}
 }
