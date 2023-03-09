@@ -13,6 +13,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 	@Query("SELECT p, CASE WHEN f.id IS NULL THEN false ELSE true END as isLiked FROM Post p LEFT JOIN Favorite f ON p.id = f.post.id AND f.user.id = :userId")
     List<Object[]> findAllWithIsLikedByUser(@Param("userId") Long userId);
     
-    @Query(value = "SELECT * FROM post ORDER BY favorite DESC, post_id ASC LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM post ORDER BY favorite DESC, post_id DESC LIMIT 1", nativeQuery = true)
     Post orderByFavorite();    
 }
