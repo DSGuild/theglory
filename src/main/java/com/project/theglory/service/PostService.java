@@ -62,7 +62,7 @@ public class PostService {
 	}
 	
 	//TODO : 포스트 좋아요 순으로 정렬해서 RESPONSE
-	public List<Post> getOrderByFavorite() {
+	public Post getOrderByFavorite() {
 		return postRepository.orderByFavorite();
 	}
 }

@@ -100,12 +100,8 @@ public class PostController {
     
     // TODO : 포스트 좋아요 순으로 정렬 시켜서 응답
     @GetMapping("/all/favorite")
-	public List<PostResponseDto> getOrderByFavorite() {
-    	List<Post> posts = postService.getOrderByFavorite();
-    	List<PostResponseDto> responses = new ArrayList<PostResponseDto>();
-    	for (Post p : posts) {
-    		responses.add(PostResponseDto.builder().entity(p).build());
-    	}
-    	return responses;
+	public PostResponseDto getOrderByFavorite() {
+        Post post = postService.getOrderByFavorite();
+        return PostResponseDto.builder().entity(post).build();
     }
 }
