@@ -3,6 +3,7 @@ package com.project.theglory.domain.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +50,12 @@ public class Post {
 	
 	@OneToMany(mappedBy = "post")
 	private List<Reply> replies;
+	
+	@PrePersist
+	public void prePersist() {
+		this.deleteYn = this.deleteYn == null ? 0 : this.deleteYn;
+		this.favorite = this.favorite == null ? 0 : this.favorite;
+	}
 
 	@Builder
 	public Post(Long postId, String title, String content, LocalDateTime createdAt, Integer deleteYn, Integer episode,
