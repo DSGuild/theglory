@@ -25,8 +25,12 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	public void updateBadge(Long userId, int badge) {
-//		userRepository.updateBadge(userId, badge);
+	public void updateBadge(Long userId, int badge, int season) {
+		if(season == 1) {
+			userRepository.updateBadge1(userId, badge);
+		} else {
+			userRepository.updateBadge2(userId, badge);
+		}
 	}
 
 }

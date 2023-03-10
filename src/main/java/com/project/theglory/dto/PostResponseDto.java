@@ -22,6 +22,8 @@ public class PostResponseDto {
 	private String userNm;
 	private String profile;
 	private boolean likedByUser;
+	private Integer badge1;
+	private Integer badge2;
 	
 	@Builder
 	public PostResponseDto(Post entity, boolean likedByUser) {
@@ -36,5 +38,7 @@ public class PostResponseDto {
 		this.userNm = entity.getUser().getUserNm();
 		this.profile = entity.getUser().getProfile();
 		this.likedByUser = likedByUser;
+		this.badge1 = entity.getUser().getBadge1();
+		this.badge2 = entity.getUser().getBadge2();
 	}
 }

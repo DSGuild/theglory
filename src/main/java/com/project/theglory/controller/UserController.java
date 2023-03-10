@@ -40,7 +40,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/badge/{userId}")
-	public void updateBadge(@PathVariable Long userId, @RequestParam int badge) {
-//		userService.updateBadge(userId, badge);
+	public void updateBadge(@PathVariable Long userId, @RequestParam int badge, @RequestParam int season) {
+		userService.updateBadge(userId, badge, season);
 	}
 }

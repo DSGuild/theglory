@@ -14,6 +14,7 @@ public class QuizLogResponseDto {
 	
 	private Long quizLogId;
 	private Integer level;
+	private Integer season;
 	private LocalDateTime createdAt;
 	private Integer score;
 	private Integer passYn;
@@ -23,6 +24,7 @@ public class QuizLogResponseDto {
 	public QuizLogResponseDto(QuizLog entity) {
 		this.quizLogId = entity.getQuizLogId();
 		this.level = entity.getLevel();
+		this.season = entity.getSeason();
 		this.createdAt = entity.getCreatedAt();
 		this.score = entity.getScore();
 		this.passYn = entity.getPassYn();

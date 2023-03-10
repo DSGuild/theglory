@@ -28,6 +28,7 @@ public class QuizLog {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long quizLogId;
 	private Integer level;
+	private Integer season;
 	
 	@CreatedDate
 	private LocalDateTime createdAt;
@@ -43,9 +44,10 @@ public class QuizLog {
 	private User user;
 	
 	@Builder
-	public QuizLog(Long quizLogId, Integer level, LocalDateTime createdAt, Integer score, Integer passYn, User user) {
+	public QuizLog(Long quizLogId, Integer level, Integer season, LocalDateTime createdAt, Integer score, Integer passYn, User user) {
 		this.quizLogId = quizLogId;
 		this.level = level;
+		this.season = season;
 		this.createdAt = createdAt;
 		this.score = score;
 		this.passYn = passYn;

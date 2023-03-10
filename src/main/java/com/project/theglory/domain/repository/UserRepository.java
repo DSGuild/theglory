@@ -14,9 +14,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
 
-//	@Transactional
-//	@Modifying
-//	@Query("update User u set u.badge = ?2 where u.userId = ?1")
-//	void updateBadge(Long userId, int badge);
+	@Transactional
+	@Modifying
+	@Query("update User u set u.badge1 = ?2 where u.userId = ?1")
+	void updateBadge1(Long userId, int badge);
+	
+	@Transactional
+	@Modifying
+	@Query("update User u set u.badge2 = ?2 where u.userId = ?1")
+	void updateBadge2(Long userId, int badge);
 
 }

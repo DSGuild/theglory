@@ -16,14 +16,16 @@ public class QuizLogRequestDto {
 	
 	private Long quizLogId;
 	private Integer level;
+	private Integer season;
 	private Integer score;
 	private Integer passYn;
 	private Long userId;
 	
 	@Builder
-	public QuizLogRequestDto(Long quizLogId, Integer level, Integer score, Integer passYn, User user, Long userId) {
+	public QuizLogRequestDto(Long quizLogId, Integer level, Integer season, Integer score, Integer passYn, User user, Long userId) {
 		this.quizLogId = quizLogId;
 		this.level = level;
+		this.season = season;
 		this.score = score;
 		this.passYn = passYn;
 		this.userId = userId;
@@ -33,6 +35,7 @@ public class QuizLogRequestDto {
 		return QuizLog.builder()
 				.quizLogId(quizLogId)
 				.level(level)
+				.season(season)
 				.score(score)
 				.passYn(passYn)
 				.user(User.builder().userId(userId).build())
