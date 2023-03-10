@@ -16,8 +16,7 @@ public class UserResponseDto {
 	private String userNm;
 	private String profile;
 	private LocalDateTime createdAt;
-	private int badge1;
-	private int badge2;
+	private int badge;
 	private int episode;
 	
 	@Builder
@@ -27,8 +26,7 @@ public class UserResponseDto {
 		this.userNm = entity.getUserNm();
 		this.profile = entity.getProfile();
 		this.createdAt = entity.getCreatedAt();
-		this.badge1 = entity.getBadge1();
-		this.badge2 = entity.getBadge2();
+		this.badge = entity.getBadge();
 		this.episode = entity.getEpisode();
 	}
 }

@@ -7,6 +7,7 @@ import com.project.theglory.domain.repository.FavoriteRepository;
 import com.project.theglory.domain.repository.PostRepository;
 import com.project.theglory.domain.repository.ReplyRepository;
 import com.project.theglory.domain.repository.UserRepository;
+import com.project.theglory.dto.UserRequestDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +23,10 @@ public class UserService {
 
 	public void createUser(User user) {
 		userRepository.save(user);
+	}
+
+	public void updateBadge(Long userId, int badge) {
+		userRepository.updateBadge(userId, badge);
 	}
 
 }

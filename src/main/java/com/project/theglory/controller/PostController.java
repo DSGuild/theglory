@@ -84,6 +84,14 @@ public class PostController {
 		return responses;
 	}
 	
+	@PostMapping("/{postId}/reply/{userId}")
+	public void createReply(@PathVariable Long postId, @PathVariable Long userId, @RequestParam String content) {
+		Post post = Post.builder().postId(postId).build();
+		User user = User.builder().userId(userId).build();
+		Reply reply = Reply.builder().post(post).user(user).content(content).build();
+		postService.createReply(reply);
+	}
+	
 	@PostMapping("/{postId}/favorite/{userId}")
     public ResponseEntity<?> addFavorite(@PathVariable Long postId, @PathVariable Long userId) {
         try {

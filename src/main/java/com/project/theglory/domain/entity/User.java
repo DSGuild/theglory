@@ -32,24 +32,21 @@ public class User {
 	private String profile;
 	@CreatedDate
 	private LocalDateTime createdAt;
-	private int badge1;
-	private int badge2;
+	private int badge;
 	private int episode;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Favorite> favorities;
 
 	@Builder
-	public User(Long userId, String email, String userNm, String profile, LocalDateTime createdAt, int badge1,
-			int badge2, int episode, List<Favorite> favorities) {
+	public User(Long userId, String email, String userNm, String profile, LocalDateTime createdAt, int badge, int episode, List<Favorite> favorities) {
 		super();
 		this.userId = userId;
 		this.email = email;
 		this.userNm = userNm;
 		this.profile = profile;
 		this.createdAt = createdAt;
-		this.badge1 = badge1;
-		this.badge2 = badge2;
+		this.badge = badge;
 		this.episode = episode;
 		this.favorities = favorities;
 	}

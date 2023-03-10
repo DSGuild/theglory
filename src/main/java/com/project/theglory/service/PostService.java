@@ -3,6 +3,7 @@ package com.project.theglory.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.project.theglory.domain.entity.Favorite;
@@ -23,9 +24,10 @@ import lombok.RequiredArgsConstructor;
 public class PostService {
 	
 	final private PostRepository postRepository;
+	final private ReplyRepository replyRepository;
 
 	public List<PostResponseDto> getPosts() {
-		List<Post> posts = postRepository.findAll();
+		List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
         for (Post post : posts) {
             PostResponseDto postResponseDto = PostResponseDto.builder()
@@ -64,5 +66,9 @@ public class PostService {
 	//TODO : 포스트 좋아요 순으로 정렬해서 RESPONSE
 	public Post getOrderByFavorite() {
 		return postRepository.orderByFavorite();
+	}
+
+	public void createReply(Reply reply) {
+		replyRepository.save(reply);
 	}
 }
