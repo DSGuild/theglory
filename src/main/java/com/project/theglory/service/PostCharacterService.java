@@ -33,8 +33,8 @@ public class PostCharacterService {
 		return postCharacterRepository.findAll();
 	}
 	
-	public PostCharacter getPostCharacter(Long id) {
-		return postCharacterRepository.findById(id).orElse(null);
+	public List<PostCharacter> getPostCharacter(Long characterCode) {
+		return postCharacterRepository.findAllByCharacterCode(characterCode);
 	}
 	
 	public void createPostCharacter(PostCharacter postCharacter) {

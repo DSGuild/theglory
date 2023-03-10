@@ -15,7 +15,9 @@ public class PostStoryResponseDto {
 	private String content;
 	private Integer episode;
 	private LocalDateTime createdAt;
-	private Long userId;
+	private Integer badge1;
+	private Integer badge2;
+	private String userNm;
 	
 	@Builder
 	public PostStoryResponseDto(PostStory entity) {
@@ -23,7 +25,9 @@ public class PostStoryResponseDto {
 		this.content = entity.getContent();
 		this.episode = entity.getEpisode();
 		this.createdAt = entity.getCreatedAt();
-		this.userId = entity.getUser().getUserId();
+		this.badge1 = entity.getUser().getBadge1();
+		this.badge2 = entity.getUser().getBadge2();
+		this.userNm = entity.getUser().getUserNm();
 	}
 	
 }

@@ -20,19 +20,19 @@ public class PostStoryRequestDto {
 	
 	@Builder 
 	public PostStoryRequestDto(Long postStoryId, String content, Integer episode, LocalDateTime createdAt, Long userId) {
-//		this.postCharacterId = postCharacterId;
+		this.postStoryId = postStoryId;
 		this.content = content;
 		this.episode = episode;
-//		this.createdAt = createdAt;
+		this.createdAt = createdAt;
 		this.userId = userId;		
 	}
 	
 	public PostStory toEntity() {
 		return PostStory.builder()
-//				.postCharacterId(postStoryId)
+				.postStoryId(postStoryId)
 				.content(content)
 				.episode(episode)
-//				.createdAt(createdAt)
+				.createdAt(createdAt)
 				.user(User.builder().userId(userId).build())
 				.build();
 	}

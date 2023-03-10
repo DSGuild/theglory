@@ -44,9 +44,13 @@ public class PostEtcController {
 	}
 	
 	@GetMapping("/character/{id}")
-	public PostCharacterResponseDto getPostCharacter(@PathVariable Long id) {
-		PostCharacter postCharacter = postCharacterService.getPostCharacter(id);
-		return PostCharacterResponseDto.builder().entity(postCharacter).build();
+	public List<PostCharacterResponseDto> getPostCharacter(@PathVariable Long id) {
+		List<PostCharacter> postCharacters = postCharacterService.getPostCharacter(id);
+		List<PostCharacterResponseDto> responses = new ArrayList<PostCharacterResponseDto>();
+		for (PostCharacter c : postCharacters) {
+			responses.add(PostCharacterResponseDto.builder().entity(c).build());
+		}
+		return responses;
 	}
 	
 	

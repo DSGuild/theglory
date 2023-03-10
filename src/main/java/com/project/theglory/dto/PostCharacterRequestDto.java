@@ -20,19 +20,19 @@ public class PostCharacterRequestDto {
 	
 	@Builder 
 	public PostCharacterRequestDto(Long postCharacterId, String content, Integer characterCode, LocalDateTime createdAt, Long userId) {
-//		this.postCharacterId = postCharacterId;
+		this.postCharacterId = postCharacterId;
 		this.content = content;
 		this.characterCode = characterCode;
-//		this.createdAt = createdAt;
+		this.createdAt = createdAt;
 		this.userId = userId;		
 	}
 	
 	public PostCharacter toEntity() {
 		return PostCharacter.builder()
-//				.postCharacterId(postCharacterId)
+				.postCharacterId(postCharacterId)
 				.content(content)
 				.characterCode(characterCode)
-//				.createdAt(createdAt)
+				.createdAt(createdAt)
 				.user(User.builder().userId(userId).build())
 				.build();
 	}
