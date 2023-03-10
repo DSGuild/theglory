@@ -26,7 +26,7 @@ public class UserService {
 	}
 
 	public void updateBadge(Long userId, int badge) {
-		userRepository.updateBadge(userId, badge);
+//		userRepository.updateBadge(userId, badge);
 	}
 
 }

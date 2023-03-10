@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,21 +33,29 @@ public class User {
 	private String profile;
 	@CreatedDate
 	private LocalDateTime createdAt;
-	private int badge;
-	private int episode;
+	private Integer badge1;
+	private Integer badge2;
+	private Integer episode;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Favorite> favorities;
+	
+	@PrePersist
+	public void prePersist() {
+		this.badge1 = this.badge1 == null ? 0 : this.badge1;
+		this.badge2 = this.badge2 == null ? 0 : this.badge2;
+	}
 
 	@Builder
-	public User(Long userId, String email, String userNm, String profile, LocalDateTime createdAt, int badge, int episode, List<Favorite> favorities) {
+	public User(Long userId, String email, String userNm, String profile, LocalDateTime createdAt, int badge1, int badge2, int episode, List<Favorite> favorities) {
 		super();
 		this.userId = userId;
 		this.email = email;
 		this.userNm = userNm;
 		this.profile = profile;
 		this.createdAt = createdAt;
-		this.badge = badge;
+		this.badge1 = badge1;
+		this.badge2 = badge2;
 		this.episode = episode;
 		this.favorities = favorities;
 	}

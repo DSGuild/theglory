@@ -17,18 +17,20 @@ public class UserRequestDto {
 	private String email;
 	private String userNm;
 	private String profile;
-	private int badge;
-	private int episode;
+	private Integer badge1;
+	private Integer badge2;
+	private Integer episode;
 	
 	@Builder
-	public UserRequestDto(Long userId, String email, String userNm, String profile, int badge,
+	public UserRequestDto(Long userId, String email, String userNm, String profile, Integer badge1, Integer badge2,
 			int episode) {
 		super();
 		this.userId = userId;
 		this.email = email;
 		this.userNm = userNm;
 		this.profile = profile;
-		this.badge = badge;
+		this.badge1 = badge1;
+		this.badge2 = badge2;
 		this.episode = episode;
 	}
 	
@@ -38,7 +40,8 @@ public class UserRequestDto {
 				.email(email)
 				.userNm(userNm)
 				.profile(profile)
-				.badge(badge)
+				.badge1(badge1)
+				.badge2(badge2)
 				.episode(episode)
 				.build();
 	}
