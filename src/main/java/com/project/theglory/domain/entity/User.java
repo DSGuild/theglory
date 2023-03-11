@@ -44,10 +44,11 @@ public class User {
 	public void prePersist() {
 		this.badge1 = this.badge1 == null ? 0 : this.badge1;
 		this.badge2 = this.badge2 == null ? 0 : this.badge2;
+		this.episode = this.episode == null ? 0 : this.episode;
 	}
 
 	@Builder
-	public User(Long userId, String email, String userNm, String profile, LocalDateTime createdAt, int badge1, int badge2, int episode, List<Favorite> favorities) {
+	public User(Long userId, String email, String userNm, String profile, LocalDateTime createdAt, Integer badge1, Integer badge2, Integer episode, List<Favorite> favorities) {
 		super();
 		this.userId = userId;
 		this.email = email;
