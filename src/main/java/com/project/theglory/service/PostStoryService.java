@@ -33,8 +33,8 @@ public class PostStoryService {
 		return postStoryRepository.findAll();
 	}
 	
-	public PostStory getPostStory(Long id) {
-		return postStoryRepository.findById(id).orElse(null);
+	public List<PostStory> getPostStory(Long episode) {
+		return postStoryRepository.findAllByEpisode(episode);
 	}
 	
 	public void createPostStory(PostStory postStory) {

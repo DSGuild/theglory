@@ -70,11 +70,16 @@ public class PostEtcController {
 		return responses;
 	}
 	
-	@GetMapping("/story/{id}")
-	public PostStoryResponseDto getPostStory(@PathVariable Long id) {
-		PostStory postStory = postStoryService.getPostStory(id);
-		return PostStoryResponseDto.builder().entity(postStory).build();
+	@GetMapping("/story/{episode}")
+	public List<PostStoryResponseDto> getPostStory(@PathVariable Long episode) {
+		List<PostStory> postStories = postStoryService.getPostStory(episode);
+		List<PostStoryResponseDto> responses = new ArrayList<PostStoryResponseDto>();
+		for (PostStory s : postStories) {
+		    responses.add(PostStoryResponseDto.builder().entity(s).build());
+	    }
+	return responses;
 	}
+  
 	
 	
 	@PostMapping("/story")
