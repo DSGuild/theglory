@@ -70,9 +70,10 @@ public class PostVoteService {
 		userVoteRepository.save(userVote);
 	}
 	
-	public void createVote(Vote vote) {
-		voteRepository.save(vote);
-		
+	public void createVote(Long postVoteId, Long userId, Long voteId) {
+		PostVote postVote = postVoteRepository.findById(postVoteId).orElse(null);
+		postVote.plusTotal();
+		// TODO
 	}
 	
 }

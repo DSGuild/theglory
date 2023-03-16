@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -37,8 +40,17 @@ public class User {
 	private Integer badge2;
 	private Integer episode;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Favorite> favorities;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<PostVote> postVotes;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<UserVote> userVotes;
 	
 	@PrePersist
 	public void prePersist() {

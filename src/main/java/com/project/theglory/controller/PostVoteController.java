@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.theglory.dto.PostVoteResponseDto;
@@ -32,10 +34,13 @@ public class PostVoteController {
 	public List<VoteResponseDto> getVotes(@PathVariable Long postVoteId) {
 		List<VoteResponseDto> responses;
 		responses = postVoteService.getVotes(postVoteId);
-		System.out.println(responses);
 		return responses;		
 	}
 	
+	@PostMapping("/vote/{postVoteId}")
+	public void createVote(@PathVariable Long postVoteId, @RequestParam Long userId, @RequestParam Long voteId) {
+		postVoteService.createVote(postVoteId, userId, voteId);
+	}
 	
 
 }

@@ -13,14 +13,14 @@ public class VoteResponseDto {
 	private Long voteId;
 	private String content;
 	private Integer count;
-//	private PostVote postVote;
+	private PostVote postVote;
 	
 	@Builder
 	public VoteResponseDto(Vote entity) {
 		this.voteId = entity.getVoteId();
 		this.content = entity.getContent();
 		this.count = entity.getCount();
-//		this.postVote = entity.getPostVote();
+		this.postVote = entity.getPostVote();
 	}
 
 }

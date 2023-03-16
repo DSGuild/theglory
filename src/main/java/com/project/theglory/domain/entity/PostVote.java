@@ -7,7 +7,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -37,14 +39,14 @@ public class PostVote {
 	@CreatedDate
 	private LocalDateTime createdAt;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@PrePersist
-	public void prePersist() {
-		this.total = this.total == null ? 0 : this.total;
-	}
+	@JsonIgnore
+	@OneToMany(mappedBy = "postVote")
+	private List<Vote> votes;
 	
 	@Builder
 	public PostVote(Long postVoteId, String title, Integer total, LocalDateTime createdAt, User user) {
@@ -53,5 +55,9 @@ public class PostVote {
 		this.total = total;
 		this.createdAt = createdAt;
 		this.user = user;
+	}
+	
+	public void plusTotal() {
+		this.total++;
 	}
 }

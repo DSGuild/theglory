@@ -35,6 +35,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")  
     implementation("io.micrometer:micrometer-registry-prometheus")  
     // END : promethues
+    
+    // START : Swagger
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    // END : Swagger
 }
 
 tasks.named('test') {

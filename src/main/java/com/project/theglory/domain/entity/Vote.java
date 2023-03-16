@@ -1,11 +1,16 @@
 package com.project.theglory.domain.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Builder;
@@ -24,14 +29,14 @@ public class Vote {
 	private String content;
 	private Integer count;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "post_vote_id")
 	private PostVote postVote;
 	
-	@PrePersist
-	public void prePersist() {
-		this.count = this.count == null ? 0 : this.count;
-	}
+	@JsonIgnore
+	@OneToMany(mappedBy = "vote")
+	private List<UserVote> userVotes;
 	
 	@Builder
 	public Vote(Long voteId, String content, Integer count, PostVote postVote) {
